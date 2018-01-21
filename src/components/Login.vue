@@ -13,6 +13,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'Login',
   data () {
@@ -22,15 +24,10 @@ export default {
       error: false
     }
   },
-  created () {
-    this.checkCurrentLogin()
+  computed: {
+    ...mapGetters({ currentUser: 'currentUser' })
   },
   methods: {
-    checkCurrentLogin () {
-      if (localStorage.token) {
-        this.$router.replace(this.$route.query.redirect || '/alerts')
-      }
-    },
     login () {
       this.$http.post('/auth', { user: this.email, password: this.password })
         .then(request => this.loginSuccessful(request))
@@ -42,15 +39,15 @@ export default {
         this.loginFailed()
         return
       }
-
-      localStorage.token = req.data.token
       this.error = false
-
+      localStorage.token = req.data.token
+      this.$store.dispatch('login') // <=
       this.$router.replace(this.$route.query.redirect || '/alerts')
     },
 
     loginFailed () {
       this.error = 'Login failed!'
+      this.$store.dispatch('logout') // <=
       delete localStorage.token
     }
   }
