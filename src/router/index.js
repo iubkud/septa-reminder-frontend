@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/components/Login'
-import Alerts from '@/components/Alerts'
 import Logout from '@/components/Logout'
+import AlertsList from '@/components/Alerts/List'
+import SingleAlert from '@/components/Alerts/Single'
 
 Vue.use(Router)
 
@@ -17,7 +18,12 @@ export default new Router({
     {
       path: '/alerts',
       name: 'Alerts',
-      component: Alerts
+      component: AlertsList
+    },
+    {
+      path: '/alerts/:id',
+      name: 'Alert',
+      component: SingleAlert
     },
     {
       path: '/logout',
