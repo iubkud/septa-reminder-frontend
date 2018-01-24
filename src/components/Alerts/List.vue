@@ -21,9 +21,9 @@ export default {
     }
   },
   created () {
-    this.$http.get('/alerts')
+    this.$http.get('/alerts', { headers: {'Authorization': 'Bearer ' + localStorage.token} }) // set manually because Authorization was not updating on login
       .then(request => this.buildAlertList(request.data))
-      .catch(() => { alert('Something went wrong!') })
+      .catch(() => { alert('Something went silly!') })
   },
   methods: {
     buildAlertList (data) {

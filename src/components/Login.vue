@@ -27,7 +27,19 @@ export default {
   computed: {
     ...mapGetters({ currentUser: 'currentUser' })
   },
+  created () {
+    this.checkCurrentLogin()
+  },
+  updated () {
+    this.checkCurrentLogin()
+  },
   methods: {
+    checkCurrentLogin () {
+      if (this.currentUser) {
+        this.$router.replace(this.$route.query.redirect || '/alerts')
+      }
+    },
+
     login () {
       this.$http.post('/auth', { user: this.email, password: this.password })
         .then(request => this.loginSuccessful(request))
@@ -41,13 +53,13 @@ export default {
       }
       this.error = false
       localStorage.token = req.data.token
-      this.$store.dispatch('login') // <=
+      this.$store.dispatch('login')
       this.$router.replace(this.$route.query.redirect || '/alerts')
     },
 
     loginFailed () {
       this.error = 'Login failed!'
-      this.$store.dispatch('logout') // <=
+      this.$store.dispatch('logout')
       delete localStorage.token
     }
   }
