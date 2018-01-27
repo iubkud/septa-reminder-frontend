@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar navbar-dark bg-bookstore">
-    <a class="navbar-brand" href="/">Bookstore</a>
+    <a class="navbar-brand" href="/">SEPTA Text Alerts</a>
 
     <span class="navbar-text">
       {{ currentUser.email }}

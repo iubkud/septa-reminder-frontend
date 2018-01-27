@@ -1,10 +1,7 @@
 <template>
   <div>
-    <div class="row">
-      <div class="col-12 col-md-6">
-        <h2>Create New Alert</h2>
-        <div class="alert alert-danger" v-if="error">{{ error }}</div>
-      </div>
+    <div class="page-header">
+      <h1>Create New Alert</h1>
     </div>
     <div class="row">
       <div class="col-12 col-md-6">
