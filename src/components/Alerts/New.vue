@@ -9,8 +9,10 @@
           Alert Time:
           <input v-model="alertTime" type="time" id="alertTime" class="form-control" required>
 
-          Train ID:
-          <input v-model="trainId" type="number" id="trainId" class="form-control" required>
+          RR Line:
+          <select v-model="trainId" id="trainId" class="form-control" required>
+            <option v-for="train in trains" :key="train.trainno" value="train.trainno">{{ train.line }} ({{ train.trainno }})</option>
+          </select>
 
           Nickname:
           <input v-model="nickname" type="text" id="nickname" class="form-control" required>
@@ -30,8 +32,21 @@ export default {
       alertTime: '',
       trainId: '',
       nickname: '',
-      error: false
+      error: false,
+      trains: []
     }
+  },
+  created () {
+    this.$http({
+      method: 'get',
+      url: 'http://www.isseptafucked.com/api/rr/raw_data',
+      transformRequest: [(data, headers) => {
+        delete headers.Authorization
+        return data
+      }]
+    })
+      .then(request => { this.trains = request.data.data })
+      .catch(() => { alert('SEPTA API is broken') })
   },
   methods: {
     createAlert () {
