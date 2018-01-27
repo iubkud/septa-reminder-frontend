@@ -4,6 +4,7 @@
 
     <span class="navbar-text">
       {{ currentUser.email }}
+      <router-link to="/alerts/new" class="btn btn-sm">New Alert</router-link>
       <router-link to="/logout" class="btn btn-logout btn-sm">Logout</router-link>
     </span>
 

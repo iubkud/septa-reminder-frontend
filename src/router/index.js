@@ -4,6 +4,7 @@ import Login from '@/components/Login'
 import Logout from '@/components/Logout'
 import AlertsList from '@/components/Alerts/List'
 import SingleAlert from '@/components/Alerts/Single'
+import NewAlert from '@/components/Alerts/New'
 
 Vue.use(Router)
 
@@ -19,6 +20,11 @@ export default new Router({
       path: '/alerts',
       name: 'Alerts',
       component: AlertsList
+    },
+    {
+      path: '/alerts/new',
+      name: 'New Alert',
+      component: NewAlert
     },
     {
       path: '/alerts/:id',
